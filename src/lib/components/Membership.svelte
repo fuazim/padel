@@ -43,13 +43,26 @@
     ];
 </script>
 
-<section id="membership" class="w-full bg-[#F4F9FF] py-16 md:py-24">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+<section
+    id="membership"
+    class="w-full bg-[#F4F9FF] rounded-4xl md:rounded-[4rem] pt-12 pb-8 md:pt-20 md:pb-4"
+>
+    <div class="max-w-[1400px] mx-auto px-8 sm:px-6 lg:px-8">
+        <!-- Mobile Layout uses flex with order, Desktop uses grid -->
         <div
-            class="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-24 items-start"
+            class="flex flex-col lg:grid lg:grid-cols-5 gap-6 md:gap-12 lg:gap-24 items-start"
         >
-            <!-- Left Column: Membership Cards -->
-            <div class="flex flex-col gap-4 md:gap-6 lg:col-span-3">
+            <!-- Badge - Order 1 on mobile -->
+            <div
+                class="order-1 lg:order-none lg:hidden inline-block px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide bg-white"
+            >
+                Memberships
+            </div>
+
+            <!-- Left Column: Membership Cards - Order 2 on mobile -->
+            <div
+                class="order-2 lg:order-none flex flex-col gap-4 md:gap-6 lg:col-span-3 w-full"
+            >
                 {#each plans as plan}
                     <!-- Card Container -->
                     <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -170,9 +183,45 @@
                 {/each}
             </div>
 
-            <!-- Right Column: Text Content -->
+            <!-- Icon - Order 3 on mobile (centered) -->
             <div
-                class="flex flex-col items-start gap-8 lg:sticky lg:top-24 h-full lg:col-span-2"
+                class="order-3 lg:hidden w-full flex justify-center pointer-events-none py-4"
+            >
+                <svg
+                    height="512"
+                    viewBox="0 0 56 41"
+                    width="512"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-20 h-20 opacity-80"
+                >
+                    <g id="Page-1" fill="none" fill-rule="evenodd">
+                        <g id="018---Court" fill="#0099FF" fill-rule="nonzero">
+                            <path
+                                id="Shape"
+                                d="m27 21v11h-15.171l3.071-11zm14.1 0 3.07 11h-15.17v-11zm-29.829 13h33.458l1.954 7h-37.366zm37.488 7-5.582-20h5.123l6.784 18.658c.111539.3064711.0666207.6480792-.1203532.9152987-.186974.2672194-.4925097.426473-.8186468.4267013zm-8.189-40.367 3.701 9.367h-4.163l-2.791-10h2.323c.4105475.00009071.7793291.25110009.93.633zm-22.603 9.367 1.4-5h7.633v5zm17.274-10 .838 3h-16.158l.838-3zm-6.241 5h7.637l1.4 5h-9.037zm-12.639-5h2.322l-2.791 10h-4.162l3.7-9.367c.1508048-.38223951.5200876-.63332008.931-.633zm-10.361 13c0-.5522847.44771525-1 1-1h42c.5522847 0 1 .4477153 1 1v5c0 .5522847-.4477153 1-1 1h-42c-.55228475 0-1-.4477153-1-1zm1.7 8h5.123l-5.582 20h-5.386c-.32613715-.0002283-.63167281-.1594819-.81864677-.4267013-.18697396-.2672195-.23189224-.6088276-.12035323-.9152987z"
+                            />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Title - Order 4 on mobile -->
+            <div class="order-4 lg:order-none max-w-xl lg:hidden pb-4">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-3"
+                >
+                    Tiga pilihan membership untuk meningkatkan kualitas
+                    permainanmu.
+                </h2>
+                <p class="text-gray-500 text-base font-light leading-relaxed">
+                    Manfaat eksklusif. Pengalaman premium. Satu pilihan yang
+                    tepat.
+                </p>
+            </div>
+
+            <!-- Right Column: Desktop Only -->
+            <div
+                class="hidden lg:flex flex-col items-start justify-center gap-4 lg:sticky lg:top-24 h-full lg:col-span-2"
             >
                 <div
                     class="inline-block px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide bg-white"
@@ -182,34 +231,32 @@
 
                 <div class="max-w-xl">
                     <h2
-                        class="text-3xl md:text-4xl lg:text-[2.5rem] leading-tight font-normal text-black mb-6"
+                        class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-6"
                     >
                         Tiga pilihan membership untuk meningkatkan kualitas
                         permainanmu.
                     </h2>
-                    <p
-                        class="text-gray-500 text-lg md:text-xl font-light leading-relaxed"
-                    >
+                    <p class="text-gray-500 text-xl font-light leading-relaxed">
                         Manfaat eksklusif. Pengalaman premium. Satu pilihan yang
                         tepat.
                     </p>
                 </div>
 
-                <!-- Background Illustration -->
+                <!-- Background Illustration - Desktop only -->
                 <div
-                    class="w-full mt-6 relative flex justify-center pointer-events-none"
+                    class="w-full flex justify-center pointer-events-none -mt-24 -mb-2"
                 >
                     <svg
                         height="512"
                         viewBox="0 0 56 41"
                         width="512"
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-full max-w-[300px] opacity-100"
+                        class="w-full max-w-[200px]"
                     >
                         <g id="Page-1" fill="none" fill-rule="evenodd">
                             <g
                                 id="018---Court"
-                                fill="#D6E8FF"
+                                fill="#0099FF"
                                 fill-rule="nonzero"
                             >
                                 <path

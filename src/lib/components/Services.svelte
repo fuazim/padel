@@ -4,7 +4,7 @@
 
 <section
     id="services"
-    class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24"
+    class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-20"
 >
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 h-full">
         <!-- Column 1: Text Content -->

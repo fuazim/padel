@@ -64,7 +64,7 @@
 
 <section
     id="about"
-    class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24"
+    class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-20"
 >
     <div class="flex flex-col gap-8 md:gap-12">
         <!-- Row 1: Header Badge & Description -->
@@ -80,7 +80,7 @@
             <h2
                 class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black max-w-4xl lg:text-right"
             >
-                Sejak 202 Padel hadir sebagai tempat berlatih dan berkembang
+                Sejak 2021 Padel hadir sebagai tempat berlatih dan berkembang
                 bagi para pemain pemula hingga atlet berpengalaman.
             </h2>
         </div>
@@ -91,7 +91,7 @@
         >
             <!-- Card 1: Features (Black) -->
             <div
-                class="bg-black text-white rounded-2xl md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group"
+                class="bg-black text-white rounded-2xl md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-[500px] md:min-h-auto"
             >
                 <div class="z-10">
                     <div class="w-16 h-16 mb-6 text-white">
@@ -140,13 +140,13 @@
 
                 <!-- Subtle Pattern Overlay -->
                 <div
-                    class="absolute inset-0 opacity-10 pointer-events-none bg-[url('/images/pattern.png')] bg-repeat"
+                    class="absolute inset-0 opacity-10 pointer-events-none bg-[url('/images/pattern.svg')] bg-repeat"
                 ></div>
             </div>
 
             <!-- Card 2: Lesson (Image Background) -->
             <div
-                class="relative rounded-2xl md:rounded-[2rem] overflow-hidden group min-h-[350px] md:min-h-[500px] lg:min-h-auto"
+                class="relative rounded-2xl md:rounded-[2rem] overflow-hidden group min-h-[500px] md:min-h-[500px] lg:min-h-auto"
             >
                 <img
                     src="/images/images/lesson-card.png"
@@ -173,7 +173,7 @@
 
             <!-- Card 3: Trainers (Light Gray) -->
             <div
-                class="bg-gray-100 rounded-2xl md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-between"
+                class="bg-gray-100 rounded-2xl md:rounded-[2rem] min-h-[500px] md:min-h-[500px] lg:min-h-auto p-6 md:p-8 flex flex-col justify-between"
             >
                 <div>
                     <h3 class="mb-4 text-black leading-tight">

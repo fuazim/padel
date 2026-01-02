@@ -8,7 +8,7 @@
             role: "Recreational Player",
             rating: 4.9,
             quote: "Sudah lama mau coba padel tapi bingung mulai dari mana. Di Padel, semuanya terasa natural — pelatihnya sabar, fasilitasnya nyaman, dan progress saya benar-benar kelihatan.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Nadia+Putri",
+            image: "/images/testimonials/nadia-putri.jpg",
         },
         {
             id: 2,
@@ -16,7 +16,7 @@
             role: "Beginner Member",
             rating: 5.0,
             quote: "Saya awalnya cuma ikut teman. Sekarang malah jadi rutin latihan tiap minggu. Sistem membership-nya fleksibel dan kelasnya selalu fun namun tetap teknis.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Andreas+Santoso",
+            image: "/images/testimonials/andreas-santoso.jpg",
         },
         {
             id: 3,
@@ -24,7 +24,7 @@
             role: "Intermediate Player",
             rating: 4.8,
             quote: "Pelatih di sini benar-benar paham perkembangan pemain. Teknik saya dibenahi pelan-pelan, tapi hasilnya terasa signifikan.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Maya+Rahman",
+            image: "/images/testimonials/maya-rahman.jpg",
         },
         {
             id: 4,
@@ -32,7 +32,7 @@
             role: "Club Tournament Participant",
             rating: 4.7,
             quote: "Turnamen internalnya seru banget. Komunitasnya suportif, bukan yang bikin terintimidasi. Cocok untuk yang suka belajar sambil santai.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Rico+Halim",
+            image: "/images/testimonials/rico-halim.jpg",
         },
         {
             id: 5,
@@ -40,7 +40,7 @@
             role: "Parent of Junior Player",
             rating: 4.9,
             quote: "Anak saya ikut junior program di sini. Pelatih-pelatihnya ramah dan profesional. Dia jadi lebih percaya diri — bukan cuma di lapangan, tapi juga di sekolah.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Laras+Widodo",
+            image: "/images/testimonials/laras-widodo.jpg",
         },
         {
             id: 6,
@@ -48,7 +48,7 @@
             role: "Active Member",
             rating: 4.6,
             quote: "Saya sudah pernah coba beberapa klub olahraga. Padel terasa beda: fasilitasnya rapi, jam latihan jelas, dan stafnya helpful.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Kevin+Wijaya",
+            image: "/images/testimonials/kevin-wijaya.jpg",
         },
         {
             id: 7,
@@ -56,7 +56,7 @@
             role: "Private Coaching Student",
             rating: 5.0,
             quote: "Private lesson-nya sangat efektif. Pelatihnya detail tapi tetap santai. Dalam beberapa minggu saja teknik saya banyak berkembang.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Ayu+Rahma",
+            image: "/images/testimonials/ayu-rahma.jpg",
         },
         {
             id: 8,
@@ -64,7 +64,7 @@
             role: "Weekend Player",
             rating: 4.8,
             quote: "Kalau mau olahraga tapi tetap fun, padel jawabannya. Di Padel, suasananya ramah dan profesional — bikin betah datang lagi.",
-            image: "https://placehold.co/600x500/e2e8f0/1e293b?text=Daniel+Surya",
+            image: "/images/testimonials/daniel-surya.jpg",
         },
     ];
 
@@ -89,75 +89,80 @@
 
 <section
     id="testimonials"
-    class="w-full bg-white pt-20 md:pt-28 pb-16 md:pb-24 overflow-hidden"
+    class="w-full bg-white py-12 md:py-20 overflow-hidden"
 >
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div
-            class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-24 items-center"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-12 lg:gap-24 items-center"
         >
-            <!-- Left Content -->
+            <!-- Left Content Wrapper -->
+            <!-- Mobile: contents (children grid items). Desktop: Flex Column. -->
             <div
-                class="flex flex-col items-start relative z-10 h-full justify-center"
+                class="contents lg:flex lg:flex-col lg:items-start lg:justify-center lg:relative lg:z-10 lg:h-full"
             >
                 <!-- Badge -->
                 <div
-                    class="inline-block px-5 py-2 mb-8 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide"
+                    class="order-1 lg:order-none inline-block px-5 py-2 mb-0 lg:mb-8 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide justify-self-start"
                 >
                     Cerita dari Member Kami
                 </div>
 
                 <!-- Quote (Dynamic) -->
                 <div
-                    class="grid grid-cols-1 grid-rows-1 mb-6 md:mb-8 min-h-[120px] md:min-h-[180px]"
+                    class="order-5 lg:order-none grid grid-cols-1 grid-rows-1 mb-6 md:mb-8 min-h-[240px] md:min-h-[320px]"
                 >
                     {#key currentIndex}
-                        <blockquote
-                            class="col-start-1 row-start-1 text-xl md:text-2xl lg:text-3xl font-normal text-black leading-snug"
+                        <div
+                            class="col-start-1 row-start-1 flex flex-col items-start gap-6"
                             in:fade={{ duration: 500 }}
                             out:fade={{ duration: 500 }}
                         >
-                            "{testimonials[currentIndex].quote}"
-                        </blockquote>
+                            <blockquote
+                                class="text-xl md:text-2xl lg:text-3xl font-normal text-black leading-snug"
+                            >
+                                "{testimonials[currentIndex].quote}"
+                            </blockquote>
+
+                            <!-- Rating -->
+                            <div class="flex items-center gap-4">
+                                <div class="flex gap-1">
+                                    {#each getStars(testimonials[currentIndex].rating) as isFilled, i}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            class="w-5 h-5 {isFilled
+                                                ? 'text-[#FFA800]'
+                                                : 'text-gray-300'}"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    {/each}
+                                </div>
+                                <span class="text-lg font-medium text-gray-900"
+                                    >{testimonials[currentIndex].rating}</span
+                                >
+                            </div>
+                        </div>
                     {/key}
                 </div>
 
                 <!-- Info & Nav Wrapper -->
-                <div class="w-full flex justify-between items-end mt-4">
-                    <!-- User Info & Rating (Dynamic) -->
-                    <div class="grid grid-cols-1 grid-rows-1">
+                <div
+                    class="order-3 lg:order-none w-full flex justify-between items-end mb-2 lg:mb-0 lg:mt-4"
+                >
+                    <!-- User Info (Dynamic) -->
+                    <div class="grid grid-cols-1 grid-rows-1 min-h-[60px]">
                         {#key currentIndex}
                             <div
                                 class="col-start-1 row-start-1"
                                 in:fade={{ duration: 500 }}
                                 out:fade={{ duration: 500 }}
                             >
-                                <!-- Rating -->
-                                <div class="flex items-center gap-4 mb-2">
-                                    <div class="flex gap-1">
-                                        {#each getStars(testimonials[currentIndex].rating) as isFilled, i}
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                class="w-5 h-5 {isFilled
-                                                    ? 'text-[#FFA800]'
-                                                    : 'text-gray-300'}"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                                    clip-rule="evenodd"
-                                                />
-                                            </svg>
-                                        {/each}
-                                    </div>
-                                    <span
-                                        class="text-lg font-medium text-gray-900"
-                                        >{testimonials[currentIndex]
-                                            .rating}</span
-                                    >
-                                </div>
-
                                 <!-- Name & Role -->
                                 <div>
                                     <h4
@@ -199,7 +204,7 @@
                         <button
                             type="button"
                             onclick={nextTestimonial}
-                            class="w-14 h-14 rounded-full bg-[#0099FF] flex items-center justify-center hover:bg-[#0088E0] transition-colors group shadow-lg shadow-blue-200"
+                            class="w-14 h-14 rounded-full bg-[#0099FF] flex items-center justify-center hover:bg-[#0088E0] transition-colors group"
                             aria-label="Next testimonial"
                         >
                             <svg
@@ -221,31 +226,41 @@
                 </div>
             </div>
 
-            <!-- Right Content: Image & Index -->
+            <!-- Right Content Wrapper -->
+            <!-- Mobile: contents. Desktop: Flex Column/Relative. -->
             <div
-                class="relative flex flex-col items-center lg:items-end justify-center lg:pl-12 pt-12 md:pt-16"
+                class="contents lg:flex lg:flex-col lg:items-end lg:justify-center lg:pl-12 lg:pt-10 lg:relative"
             >
                 <!-- Index Number (Dynamic) -->
-                {#key currentIndex}
-                    <div
-                        class="absolute -top-10 md:-top-16 lg:-top-24 right-0 flex items-end z-20"
-                        in:fly={{ y: -20, duration: 600, delay: 200 }}
-                        out:fade={{ duration: 200 }}
-                    >
-                        <span
-                            class="text-5xl md:text-6xl lg:text-7xl font-light text-black tracking-tighter"
+                <!-- Mobile: Order 2. Static/Relative. -->
+                <!-- Desktop: Absolute top. -->
+                <div
+                    class="order-2 lg:order-none w-full grid grid-cols-1 grid-rows-1 mb-0 lg:mb-0 lg:absolute lg:-top-10 lg:right-0 z-20 min-h-[60px] md:min-h-[80px]"
+                >
+                    {#key currentIndex}
+                        <div
+                            class="col-start-1 row-start-1 flex justify-between lg:justify-end"
+                            in:fade={{ duration: 300 }}
+                            out:fade={{ duration: 150 }}
                         >
-                            {String(currentIndex + 1).padStart(2, "0")}
-                        </span>
-                        <span class="text-xl text-gray-400 mb-2 ml-2"
-                            >/ {testimonials.length}</span
-                        >
-                    </div>
-                {/key}
+                            <div class="flex items-end">
+                                <span
+                                    class="text-5xl md:text-6xl lg:text-7xl font-light text-black tracking-tighter"
+                                >
+                                    {String(currentIndex + 1).padStart(2, "0")}
+                                </span>
+                                <span class="text-xl text-gray-400 mb-2 ml-2"
+                                    >/ {testimonials.length}</span
+                                >
+                            </div>
+                        </div>
+                    {/key}
+                </div>
 
                 <!-- Image Card (Dynamic) -->
+                <!-- Mobile: Order 3. -->
                 <div
-                    class="w-full max-w-[560px] aspect-[4/3] rounded-2xl md:rounded-[2.5rem] overflow-hidden relative grid grid-cols-1 grid-rows-1 bg-gray-100"
+                    class="order-4 lg:order-none w-full max-w-[560px] aspect-[4/3] rounded-2xl md:rounded-[2.5rem] overflow-hidden relative grid grid-cols-1 grid-rows-1 bg-gray-100 mb-4 lg:mb-0 mx-auto lg:mx-0"
                 >
                     {#key currentIndex}
                         <img

@@ -20,11 +20,11 @@
 
         <!-- Main Content -->
         <div
-            class="relative z-10 w-full mt-40 px-6 md:px-12 flex-grow flex flex-col justify-center items-center text-center pt-32"
+            class="relative z-10 w-full mt-24 md:mt-40 px-6 md:px-12 flex-grow flex flex-col justify-center items-center text-center pt-20 md:pt-32"
         >
             <div class="max-w-4xl mx-auto z-1">
                 <h1
-                    class="text-white text-5xl md:text-6xl lg:text-[4rem] font-normal leading-[1.05] mb-8 tracking-tight"
+                    class="text-white text-5xl md:text-6xl lg:text-[4rem] font-normal leading-[1.05] mb-4 md:mb-8 tracking-tight"
                 >
                     Upgrade Skill Padelmu
                     <span
@@ -35,7 +35,7 @@
                 </h1>
 
                 <p
-                    class="text-base md:text-lg text-gray-200 mb-12 leading-relaxed font-light max-w-lg mx-auto tracking-wide"
+                    class="text-base md:text-lg text-gray-200 mb-6 md:mb-12 leading-relaxed font-light max-w-lg mx-auto tracking-wide"
                 >
                     Rasakan serunya padel bersama pelatih berpengalaman,
                     fasilitas nyaman, dan komunitas yang suportif.
@@ -51,13 +51,15 @@
 
         <!-- Bottom Section -->
         <div
-            class="relative z-10 w-full px-6 md:px-8 pb-6 flex flex-col md:flex-row justify-between items-end gap-8"
+            class="relative z-10 w-full px-6 md:px-8 pb-6 pt-12 md:pt-0 flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-8 md:gap-8"
         >
             <!-- Bottom Left: Trainer Promo -->
-            <div class="flex items-center gap-6">
+            <div
+                class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-6"
+            >
                 <!-- Text must be readable on dark background, so keep it white/light -->
                 <span
-                    class="text-white text-sm font-light tracking-wide max-w-[150px] leading-tight opacity-90 text-left"
+                    class="text-white text-sm font-light tracking-wide max-w-[200px] md:max-w-[150px] leading-tight opacity-90 text-center md:text-left"
                 >
                     Mulai latihan bersama pelatih professional
                 </span>

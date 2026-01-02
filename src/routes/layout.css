@@ -5,6 +5,15 @@
 	--font-sans: 'Outfit', sans-serif;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: var(--font-sans);
+}
+
+/* Offset for sticky navbar when scrolling to sections */
+section[id] {
+	scroll-margin-top: 100px;
 }

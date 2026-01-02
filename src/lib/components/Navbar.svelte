@@ -4,28 +4,63 @@
 
     let activeSection = "";
 
+    const sections = [
+        "hero",
+        "about",
+        "services",
+        "membership",
+        "testimonials",
+    ];
+
     onMount(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.target.id === "about") {
-                        if (entry.isIntersecting) {
-                            activeSection = "about";
-                        } else {
-                            // If about is not intersecting, we assume we might be above or below.
-                            // For this simple case with 2 sections, if not about, it's likely hero (empty).
-                            activeSection = "";
-                        }
+        const handleScroll = () => {
+            const navbarHeight = 100;
+            let currentSection = "";
+            let minDistance = Infinity;
+
+            for (const sectionId of sections) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    // Check if section is in the viewport area below navbar
+                    if (
+                        rect.top <= navbarHeight &&
+                        rect.bottom > navbarHeight
+                    ) {
+                        // Section is currently visible at navbar level
+                        currentSection = sectionId;
+                        break;
                     }
-                });
-            },
-            { threshold: 0.5 },
-        ); // 50% visibility triggers active
+                    // Also check if section top is close to navbar
+                    const distance = Math.abs(rect.top - navbarHeight);
+                    if (
+                        rect.top <= navbarHeight + 50 &&
+                        rect.top > -rect.height &&
+                        distance < minDistance
+                    ) {
+                        minDistance = distance;
+                        currentSection = sectionId;
+                    }
+                }
+            }
 
-        const aboutSection = document.getElementById("about");
-        if (aboutSection) observer.observe(aboutSection);
+            // If hero is current, no active link
+            if (currentSection === "hero") {
+                activeSection = "";
+            } else if (currentSection) {
+                activeSection = currentSection;
+            }
+        };
 
-        return () => observer.disconnect();
+        // Initial check
+        handleScroll();
+
+        // Listen for scroll
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     });
 </script>
 
@@ -34,7 +69,6 @@
         <div class="flex justify-between items-center h-24">
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center">
-                <!-- Using a placeholder height, adjust based on actual SVG aspect ratio -->
                 <a href="/">
                     <img
                         class="h-8 w-auto"
@@ -49,29 +83,30 @@
                 <a
                     href="#about"
                     class="{activeSection === 'about'
-                        ? 'bg-gradient-to-r from-gray-100 to-gray-50 border-gray-200 text-black'
-                        : 'text-gray-600 hover:text-black border-transparent'} border px-4 py-1.5 rounded-full font-normal transition-all text-sm tracking-wide"
+                        ? 'bg-[#2B95FF] text-white font-medium'
+                        : 'text-gray-500 hover:text-black hover:bg-gray-50 font-normal'} px-4 py-1.5 rounded-full transition-all text-sm tracking-wide"
                     >Tentang Kami</a
                 >
                 <a
-                    href="/"
-                    class="text-gray-600 hover:text-black font-normal transition-all text-sm tracking-wide border border-transparent px-4 py-1.5 rounded-full"
+                    href="#services"
+                    class="{activeSection === 'services'
+                        ? 'bg-[#2B95FF] text-white font-medium'
+                        : 'text-gray-500 hover:text-black hover:bg-gray-50 font-normal'} px-4 py-1.5 rounded-full transition-all text-sm tracking-wide"
                     >Program & Layanan</a
                 >
                 <a
-                    href="/"
-                    class="text-gray-600 hover:text-black font-normal transition-all text-sm tracking-wide border border-transparent px-4 py-1.5 rounded-full"
-                    >Pelatihan</a
+                    href="#membership"
+                    class="{activeSection === 'membership'
+                        ? 'bg-[#2B95FF] text-white font-medium'
+                        : 'text-gray-500 hover:text-black hover:bg-gray-50 font-normal'} px-4 py-1.5 rounded-full transition-all text-sm tracking-wide"
+                    >Membership</a
                 >
                 <a
-                    href="/"
-                    class="text-gray-600 hover:text-black font-normal transition-all text-sm tracking-wide border border-transparent px-4 py-1.5 rounded-full"
-                    >Event & Komunitas</a
-                >
-                <a
-                    href="/"
-                    class="text-gray-600 hover:text-black font-normal transition-all text-sm tracking-wide border border-transparent px-4 py-1.5 rounded-full"
-                    >Kontak</a
+                    href="#testimonials"
+                    class="{activeSection === 'testimonials'
+                        ? 'bg-[#2B95FF] text-white font-medium'
+                        : 'text-gray-500 hover:text-black hover:bg-gray-50 font-normal'} px-4 py-1.5 rounded-full transition-all text-sm tracking-wide"
+                    >Testimoni</a
                 >
             </div>
 
