@@ -18,7 +18,9 @@
                     Layanan
                 </div>
 
-                <h2 class="text-3xl leading-snug font-normal text-black mb-12">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-12"
+                >
                     Temukan berbagai program latihan dan coaching padel mulai
                     dari dasar hingga persiapan turnamen. Kami siap mendukung
                     pemain di setiap level.

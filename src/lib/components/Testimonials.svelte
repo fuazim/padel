@@ -89,7 +89,7 @@
 
 <section
     id="testimonials"
-    class="w-full bg-white py-12 md:py-20 overflow-hidden"
+    class="w-full bg-white pt-12 pb-2 md:py-20 overflow-hidden"
 >
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div

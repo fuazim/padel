@@ -10,44 +10,39 @@
         "services",
         "membership",
         "testimonials",
+        "faq",
+        "cta",
     ];
+
+    // Sections that have corresponding nav links
+    const navSections = ["about", "services", "membership", "testimonials"];
 
     onMount(() => {
         const handleScroll = () => {
-            const navbarHeight = 100;
+            const scrollThreshold = 150; // Distance from top to consider section as "active"
             let currentSection = "";
-            let minDistance = Infinity;
 
+            // Find the last section whose top has passed the threshold
+            // This gives us the section currently being viewed
             for (const sectionId of sections) {
                 const element = document.getElementById(sectionId);
                 if (element) {
                     const rect = element.getBoundingClientRect();
-                    // Check if section is in the viewport area below navbar
-                    if (
-                        rect.top <= navbarHeight &&
-                        rect.bottom > navbarHeight
-                    ) {
-                        // Section is currently visible at navbar level
-                        currentSection = sectionId;
-                        break;
-                    }
-                    // Also check if section top is close to navbar
-                    const distance = Math.abs(rect.top - navbarHeight);
-                    if (
-                        rect.top <= navbarHeight + 50 &&
-                        rect.top > -rect.height &&
-                        distance < minDistance
-                    ) {
-                        minDistance = distance;
+                    // If section top is above threshold, it's a candidate
+                    if (rect.top <= scrollThreshold) {
                         currentSection = sectionId;
                     }
                 }
             }
 
-            // If hero is current, no active link
-            if (currentSection === "hero") {
+            // If hero is current or section has no nav link, no active link
+            if (
+                currentSection === "hero" ||
+                currentSection === "" ||
+                !navSections.includes(currentSection)
+            ) {
                 activeSection = "";
-            } else if (currentSection) {
+            } else {
                 activeSection = currentSection;
             }
         };
@@ -64,7 +59,7 @@
     });
 </script>
 
-<nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md">
+<nav class="fixed top-0 left-0 z-[9999] w-full bg-white/90 backdrop-blur-md">
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-24">
             <!-- Logo -->
