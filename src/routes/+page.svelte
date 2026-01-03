@@ -8,19 +8,26 @@
 	import FAQ from "$lib/components/FAQ.svelte";
 	import CTA from "$lib/components/CTA.svelte";
 	import Footer from "$lib/components/Footer.svelte";
+	import LanguageTransition from "$lib/components/LanguageTransition.svelte";
+	import ScrollToTop from "$lib/components/ScrollToTop.svelte";
 </script>
 
 <!-- Navbar is placed here based on specific focus request, normally could be in layout -->
 <Navbar />
 
-<main class="w-full pt-24">
-	<Hero />
-	<About />
-	<Services />
-	<Membership />
-	<Testimonials />
-	<FAQ />
-	<CTA />
-</main>
+<LanguageTransition>
+	<main class="w-full pt-24">
+		<Hero />
+		<About />
+		<Services />
+		<Membership />
+		<Testimonials />
+		<FAQ />
+		<CTA />
+	</main>
 
-<Footer />
+	<Footer />
+</LanguageTransition>
+
+<!-- Scroll to top button -->
+<ScrollToTop />

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { currentLanguage } from "$lib/stores/language";
+
     const socialLinks = [
         { name: "Instagram", href: "#" },
         { name: "Facebook", href: "#" },
@@ -6,12 +8,49 @@
         { name: "YouTube", href: "#" },
     ];
 
-    const navLinks = [
-        { name: "Tentang Kami", href: "#about" },
-        { name: "Program & Layanan", href: "#services" },
-        { name: "Membership", href: "#membership" },
-        { name: "Testimoni", href: "#testimonials" },
-    ];
+    const texts = {
+        id: {
+            tagline:
+                "Bergabunglah dengan komunitas padel yang dinamis, tempat perjalananmu menuju skill yang lebih baik dan pertemanan baru dimulai hari ini.",
+            buyMembership: "Beli Membership",
+            followUs: "Ikuti Kami",
+            menu: "Menu",
+            contact: "Kontak",
+            address: "Jl. Padel Raya No. 123<br />Jakarta Selatan, 12345",
+            hours: "Buka setiap hari: 07:00 - 22:00",
+            phone: "(021) 555-7890",
+            copyright: "Hak Cipta Dilindungi.",
+            privacyPolicy: "Kebijakan Privasi",
+            navLinks: [
+                { name: "Tentang Kami", href: "#about" },
+                { name: "Program & Layanan", href: "#services" },
+                { name: "Membership", href: "#membership" },
+                { name: "Testimoni", href: "#testimonials" },
+            ],
+        },
+        en: {
+            tagline:
+                "Join our dynamic padel community, where your journey towards better skills and new friendships begins today.",
+            buyMembership: "Buy Membership",
+            followUs: "Follow Us",
+            menu: "Menu",
+            contact: "Contact",
+            address: "Jl. Padel Raya No. 123<br />South Jakarta, 12345",
+            hours: "Open daily: 07:00 - 22:00",
+            phone: "(021) 555-7890",
+            copyright: "All Rights Reserved.",
+            privacyPolicy: "Privacy Policy",
+            navLinks: [
+                { name: "About Us", href: "#about" },
+                { name: "Programs & Services", href: "#services" },
+                { name: "Membership", href: "#membership" },
+                { name: "Testimonials", href: "#testimonials" },
+            ],
+        },
+    };
+
+    $: t = texts[$currentLanguage];
+    $: navLinks = t.navLinks;
 
     const currentYear = new Date().getFullYear();
 </script>
@@ -29,22 +68,20 @@
                 <p
                     class="text-xl md:text-2xl lg:text-3xl font-light text-white/90 leading-relaxed mb-8"
                 >
-                    Bergabunglah dengan komunitas padel yang dinamis, tempat
-                    perjalananmu menuju skill yang lebih baik dan pertemanan
-                    baru dimulai hari ini.
+                    {t.tagline}
                 </p>
                 <a
                     href="#membership"
                     class="inline-block bg-[#2B95FF] text-white px-8 py-4 rounded-full font-medium text-base hover:bg-[#1a7fe6] transition-all"
                 >
-                    Beli Membership
+                    {t.buyMembership}
                 </a>
             </div>
 
             <!-- Right: Social Links -->
             <div class="flex flex-col items-start lg:items-end">
                 <p class="text-sm text-white/60 mb-4 tracking-wide">
-                    Ikuti Kami
+                    {t.followUs}
                 </p>
                 <div class="flex flex-wrap gap-3">
                     {#each socialLinks as social}
@@ -90,7 +127,7 @@
 
             <!-- Navigation -->
             <div>
-                <p class="text-sm text-white/60 mb-5 tracking-wide">Menu</p>
+                <p class="text-sm text-white/60 mb-5 tracking-wide">{t.menu}</p>
                 <ul class="space-y-3">
                     {#each navLinks as link}
                         <li>
@@ -107,14 +144,15 @@
 
             <!-- Contact -->
             <div>
-                <p class="text-sm text-white/60 mb-5 tracking-wide">Kontak</p>
+                <p class="text-sm text-white/60 mb-5 tracking-wide">
+                    {t.contact}
+                </p>
                 <div class="space-y-3 text-white/80">
                     <p>
-                        Jl. Padel Raya No. 123<br />
-                        Jakarta Selatan, 12345
+                        {@html t.address}
                     </p>
-                    <p>Buka setiap hari: 07:00 - 22:00</p>
-                    <p>(021) 555-7890</p>
+                    <p>{t.hours}</p>
+                    <p>{t.phone}</p>
                 </div>
             </div>
         </div>
@@ -126,13 +164,13 @@
             class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
         >
             <p class="text-sm text-white/50">
-                © {currentYear} Padel. Hak Cipta Dilindungi.
+                © {currentYear} Padel. {t.copyright}
             </p>
             <a
                 href="#"
                 class="text-sm text-white/50 hover:text-white/80 transition-colors"
             >
-                Kebijakan Privasi
+                {t.privacyPolicy}
             </a>
         </div>
     </div>

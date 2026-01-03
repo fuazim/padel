@@ -3,48 +3,120 @@
     import { onMount } from "svelte";
     import { tweened } from "svelte/motion";
     import { cubicOut } from "svelte/easing";
+    import { currentLanguage } from "$lib/stores/language";
 
     let isTournamentMode = false;
 
-    // Content for switcher
-    const modes = {
-        standard: {
-            label: "Casual Mode",
-            desc: "Lapangan padel berstandar profesional dengan sistem pencahayaan turnamen memastikan kualitas permainan tetap optimal kapan pun Anda bermain.",
+    // Translations
+    const texts = {
+        id: {
+            badge: "Tentang Padel",
+            heading:
+                "Sejak 2021 Padel hadir sebagai tempat berlatih dan berkembang bagi para pemain pemula hingga atlet berpengalaman.",
+            modes: {
+                standard: {
+                    label: "Casual Mode",
+                    desc: "Lapangan padel berstandar profesional dengan sistem pencahayaan turnamen memastikan kualitas permainan tetap optimal kapan pun Anda bermain.",
+                },
+                tournament: {
+                    label: "Tournament Mode",
+                    desc: "Pencahayaan intensitas tinggi dan setup lapangan resmi standar World Padel Tour untuk pengalaman kompetisi sesungguhnya.",
+                },
+            },
+            lessonButton: "Kelas Privat & Grup",
+            trainersTitle: "Pelatih Profesional",
+            trainersDesc:
+                "Tim pelatih bersertifikat yang siap membantu meningkatkan kemampuan Anda dari teknik dasar hingga persiapan kompetisi.",
+            levels: {
+                beginner: "Pemula",
+                intermediate: "Menengah",
+                advanced: "Lanjutan",
+            },
+            statsHeading: "Beberapa capaian yang kami banggakan",
+            stats: [
+                {
+                    value: 12000,
+                    label: "Jam bermain <br/> setiap tahun",
+                    suffix: "+",
+                },
+                {
+                    value: 89,
+                    label: "Tingkat retensi <br/> member",
+                    suffix: "%",
+                },
+                { value: 1200, label: "Member <br/> aktif", suffix: "+" },
+                {
+                    value: 125,
+                    label: "Turnamen & event <br/> setiap tahun",
+                    suffix: "+",
+                },
+            ],
         },
-        tournament: {
-            label: "Tournament Mode",
-            desc: "Pencahayaan intensitas tinggi dan setup lapangan resmi standar World Padel Tour untuk pengalaman kompetisi sesungguhnya.",
+        en: {
+            badge: "About Padel",
+            heading:
+                "Since 2021, Padel has been a place to train and grow for beginners to experienced athletes.",
+            modes: {
+                standard: {
+                    label: "Casual Mode",
+                    desc: "Professional standard padel courts with tournament lighting system ensure optimal play quality whenever you play.",
+                },
+                tournament: {
+                    label: "Tournament Mode",
+                    desc: "High-intensity lighting and official World Padel Tour standard court setup for a true competitive experience.",
+                },
+            },
+            lessonButton: "Private & Group Classes",
+            trainersTitle: "Professional Coaches",
+            trainersDesc:
+                "Our certified coaching team is ready to help improve your skills from basic techniques to competition preparation.",
+            levels: {
+                beginner: "Beginner",
+                intermediate: "Intermediate",
+                advanced: "Advanced",
+            },
+            statsHeading: "Some achievements we're proud of",
+            stats: [
+                {
+                    value: 12000,
+                    label: "Playing hours <br/> per year",
+                    suffix: "+",
+                },
+                {
+                    value: 89,
+                    label: "Member retention <br/> rate",
+                    suffix: "%",
+                },
+                { value: 1200, label: "Active <br/> members", suffix: "+" },
+                {
+                    value: 125,
+                    label: "Tournaments & events <br/> per year",
+                    suffix: "+",
+                },
+            ],
         },
     };
 
+    $: t = texts[$currentLanguage];
+    $: modes = t.modes;
+    $: stats = t.stats;
+
     // Stats Interaction
     let statsSection: HTMLElement;
-    const stats = [
-        { value: 12000, label: "Jam bermain <br/> setiap tahun", suffix: "+" },
-        { value: 89, label: "Tingkat retensi <br/> member", suffix: "%" },
-        { value: 1200, label: "Member <br/> aktif", suffix: "+" },
-        {
-            value: 125,
-            label: "Turnamen & event <br/> setiap tahun",
-            suffix: "+",
-        },
-    ];
 
-    const statsValues = tweened(
-        stats.map(() => 0),
-        {
-            duration: 2000,
-            easing: cubicOut,
-        },
-    );
+    const statsValues = tweened([0, 0, 0, 0], {
+        duration: 2000,
+        easing: cubicOut,
+    });
 
     onMount(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        statsValues.set(stats.map((s) => s.value));
+                        statsValues.set(
+                            stats.map((s: { value: number }) => s.value),
+                        );
                     } else {
                         statsValues.set(
                             stats.map(() => 0),
@@ -60,6 +132,11 @@
 
         return () => observer.disconnect();
     });
+
+    // Re-animate stats when language changes
+    $: if (stats) {
+        statsValues.set(stats.map((s: { value: number }) => s.value));
+    }
 </script>
 
 <section
@@ -74,14 +151,13 @@
             <div
                 class="px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide flex-shrink-0"
             >
-                Tentang Padel
+                {t.badge}
             </div>
 
             <h2
                 class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black max-w-4xl lg:text-right"
             >
-                Sejak 2021 Padel hadir sebagai tempat berlatih dan berkembang
-                bagi para pemain pemula hingga atlet berpengalaman.
+                {t.heading}
             </h2>
         </div>
 
@@ -165,7 +241,7 @@
                         class="bg-gradient-to-r from-white/40 to-white/5 backdrop-blur-md rounded-full px-8 py-4 flex items-center gap-3 transition-all cursor-pointer hover:bg-white/20 hover:scale-105 group/btn"
                     >
                         <span class="text-white font-medium text-lg"
-                            >Kelas Privat & Grup</span
+                            >{t.lessonButton}</span
                         >
                     </button>
                 </div>
@@ -182,13 +258,11 @@
                             >100+</span
                         > <br />
                         <span class="text-3xl font-medium"
-                            >Pelatih Profesional</span
+                            >{t.trainersTitle}</span
                         >
                     </h3>
                     <p class="text-gray-600 leading-relaxed text-base mb-8">
-                        Tim pelatih bersertifikat yang siap membantu
-                        meningkatkan kemampuan Anda dari teknik dasar hingga
-                        persiapan kompetisi.
+                        {t.trainersDesc}
                     </p>
                 </div>
 
@@ -197,7 +271,7 @@
                     <div>
                         <div class="flex justify-between mb-2">
                             <span class="text-sm font-medium text-gray-900"
-                                >Pemula</span
+                                >{t.levels.beginner}</span
                             >
                             <span class="text-sm font-medium text-gray-500"
                                 >55</span
@@ -215,7 +289,7 @@
                     <div>
                         <div class="flex justify-between mb-2">
                             <span class="text-sm font-medium text-gray-900"
-                                >Menengah</span
+                                >{t.levels.intermediate}</span
                             >
                             <span class="text-sm font-medium text-gray-500"
                                 >40</span
@@ -233,7 +307,7 @@
                     <div>
                         <div class="flex justify-between mb-2">
                             <span class="text-sm font-medium text-gray-900"
-                                >Lanjutan</span
+                                >{t.levels.advanced}</span
                             >
                             <span class="text-sm font-medium text-gray-500"
                                 >35</span
@@ -255,7 +329,7 @@
             <h4
                 class="text-sm text-center font-medium text-gray-500 mb-8 uppercase tracking-wider"
             >
-                Beberapa capaian yang kami banggakan
+                {t.statsHeading}
             </h4>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -265,7 +339,7 @@
                             class="text-4xl md:text-5xl lg:text-6xl font-semibold mb-2 text-black tabular-nums"
                         >
                             {Math.floor($statsValues[i]).toLocaleString(
-                                "id-ID",
+                                $currentLanguage === "id" ? "id-ID" : "en-US",
                             )}{stat.suffix}
                         </div>
                         <div

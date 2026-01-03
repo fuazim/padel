@@ -1,5 +1,24 @@
 <script lang="ts">
+    import { currentLanguage } from "$lib/stores/language";
+
     let email = "";
+
+    const texts = {
+        id: {
+            badge: "Gabung Sekarang",
+            heading:
+                "Dapatkan info terbaru, promo spesial, dan undangan event eksklusif langsung ke inbox kamu.",
+            placeholder: "Masukkan alamat email...",
+        },
+        en: {
+            badge: "Join Now",
+            heading:
+                "Get the latest updates, special promos, and exclusive event invitations directly to your inbox.",
+            placeholder: "Enter your email address...",
+        },
+    };
+
+    $: t = texts[$currentLanguage];
 
     function handleSubmit() {
         if (email) {
@@ -34,15 +53,14 @@
             <div
                 class="inline-block px-5 py-2 mb-6 md:mb-8 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium text-white tracking-wide border border-white/20"
             >
-                Gabung Sekarang
+                {t.badge}
             </div>
 
             <!-- Heading -->
             <h2
                 class="text-2xl md:text-3xl lg:text-4xl font-normal text-white leading-snug max-w-2xl mb-8 md:mb-10"
             >
-                Dapatkan info terbaru, promo spesial, dan undangan event
-                eksklusif langsung ke inbox kamu.
+                {t.heading}
             </h2>
 
             <!-- Email Input -->
@@ -59,7 +77,7 @@
                     <input
                         type="email"
                         bind:value={email}
-                        placeholder="Masukkan alamat email..."
+                        placeholder={t.placeholder}
                         class="flex-grow bg-transparent text-gray-700 placeholder-gray-400 text-sm md:text-base py-2 border-none outline-none focus:ring-0 focus:border-none"
                         required
                     />

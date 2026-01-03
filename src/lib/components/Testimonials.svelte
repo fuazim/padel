@@ -1,72 +1,150 @@
 <script lang="ts">
-    import { fade, fly } from "svelte/transition";
+    import { fade } from "svelte/transition";
+    import { currentLanguage } from "$lib/stores/language";
 
-    const testimonials = [
-        {
-            id: 1,
-            name: "Nadia Putri",
-            role: "Recreational Player",
-            rating: 4.9,
-            quote: "Sudah lama mau coba padel tapi bingung mulai dari mana. Di Padel, semuanya terasa natural — pelatihnya sabar, fasilitasnya nyaman, dan progress saya benar-benar kelihatan.",
-            image: "/images/testimonials/nadia-putri.jpg",
+    const texts = {
+        id: {
+            badge: "Cerita dari Member Kami",
+            testimonials: [
+                {
+                    id: 1,
+                    name: "Nadia Putri",
+                    role: "Recreational Player",
+                    rating: 4.9,
+                    quote: "Sudah lama mau coba padel tapi bingung mulai dari mana. Di Padel, semuanya terasa natural — pelatihnya sabar, fasilitasnya nyaman, dan progress saya benar-benar kelihatan.",
+                    image: "/images/testimonials/nadia-putri.jpg",
+                },
+                {
+                    id: 2,
+                    name: "Andreas Santoso",
+                    role: "Beginner Member",
+                    rating: 5.0,
+                    quote: "Saya awalnya cuma ikut teman. Sekarang malah jadi rutin latihan tiap minggu. Sistem membership-nya fleksibel dan kelasnya selalu fun namun tetap teknis.",
+                    image: "/images/testimonials/andreas-santoso.jpg",
+                },
+                {
+                    id: 3,
+                    name: "Maya Rahman",
+                    role: "Intermediate Player",
+                    rating: 4.8,
+                    quote: "Pelatih di sini benar-benar paham perkembangan pemain. Teknik saya dibenahi pelan-pelan, tapi hasilnya terasa signifikan.",
+                    image: "/images/testimonials/maya-rahman.jpg",
+                },
+                {
+                    id: 4,
+                    name: "Rico Halim",
+                    role: "Club Tournament Participant",
+                    rating: 4.7,
+                    quote: "Turnamen internalnya seru banget. Komunitasnya suportif, bukan yang bikin terintimidasi. Cocok untuk yang suka belajar sambil santai.",
+                    image: "/images/testimonials/rico-halim.jpg",
+                },
+                {
+                    id: 5,
+                    name: "Laras Widodo",
+                    role: "Parent of Junior Player",
+                    rating: 4.9,
+                    quote: "Anak saya ikut junior program di sini. Pelatih-pelatihnya ramah dan profesional. Dia jadi lebih percaya diri — bukan cuma di lapangan, tapi juga di sekolah.",
+                    image: "/images/testimonials/laras-widodo.jpg",
+                },
+                {
+                    id: 6,
+                    name: "Kevin Wijaya",
+                    role: "Active Member",
+                    rating: 4.6,
+                    quote: "Saya sudah pernah coba beberapa klub olahraga. Padel terasa beda: fasilitasnya rapi, jam latihan jelas, dan stafnya helpful.",
+                    image: "/images/testimonials/kevin-wijaya.jpg",
+                },
+                {
+                    id: 7,
+                    name: "Ayu Rahma",
+                    role: "Private Coaching Student",
+                    rating: 5.0,
+                    quote: "Private lesson-nya sangat efektif. Pelatihnya detail tapi tetap santai. Dalam beberapa minggu saja teknik saya banyak berkembang.",
+                    image: "/images/testimonials/ayu-rahma.jpg",
+                },
+                {
+                    id: 8,
+                    name: "Daniel Surya",
+                    role: "Weekend Player",
+                    rating: 4.8,
+                    quote: "Kalau mau olahraga tapi tetap fun, padel jawabannya. Di Padel, suasananya ramah dan profesional — bikin betah datang lagi.",
+                    image: "/images/testimonials/daniel-surya.jpg",
+                },
+            ],
         },
-        {
-            id: 2,
-            name: "Andreas Santoso",
-            role: "Beginner Member",
-            rating: 5.0,
-            quote: "Saya awalnya cuma ikut teman. Sekarang malah jadi rutin latihan tiap minggu. Sistem membership-nya fleksibel dan kelasnya selalu fun namun tetap teknis.",
-            image: "/images/testimonials/andreas-santoso.jpg",
+        en: {
+            badge: "Stories from Our Members",
+            testimonials: [
+                {
+                    id: 1,
+                    name: "Nadia Putri",
+                    role: "Recreational Player",
+                    rating: 4.9,
+                    quote: "I've wanted to try padel for a long time but didn't know where to start. At Padel, everything feels natural — patient coaches, comfortable facilities, and I can really see my progress.",
+                    image: "/images/testimonials/nadia-putri.jpg",
+                },
+                {
+                    id: 2,
+                    name: "Andreas Santoso",
+                    role: "Beginner Member",
+                    rating: 5.0,
+                    quote: "I initially just joined a friend. Now I train regularly every week. The membership system is flexible and classes are always fun yet technical.",
+                    image: "/images/testimonials/andreas-santoso.jpg",
+                },
+                {
+                    id: 3,
+                    name: "Maya Rahman",
+                    role: "Intermediate Player",
+                    rating: 4.8,
+                    quote: "The coaches here really understand player development. My technique is being improved step by step, and the results are significant.",
+                    image: "/images/testimonials/maya-rahman.jpg",
+                },
+                {
+                    id: 4,
+                    name: "Rico Halim",
+                    role: "Club Tournament Participant",
+                    rating: 4.7,
+                    quote: "The internal tournaments are so much fun. The community is supportive, not intimidating. Perfect for those who like to learn while relaxing.",
+                    image: "/images/testimonials/rico-halim.jpg",
+                },
+                {
+                    id: 5,
+                    name: "Laras Widodo",
+                    role: "Parent of Junior Player",
+                    rating: 4.9,
+                    quote: "My child joined the junior program here. The coaches are friendly and professional. He's become more confident — not just on the court, but also at school.",
+                    image: "/images/testimonials/laras-widodo.jpg",
+                },
+                {
+                    id: 6,
+                    name: "Kevin Wijaya",
+                    role: "Active Member",
+                    rating: 4.6,
+                    quote: "I've tried several sports clubs before. Padel feels different: neat facilities, clear training schedules, and helpful staff.",
+                    image: "/images/testimonials/kevin-wijaya.jpg",
+                },
+                {
+                    id: 7,
+                    name: "Ayu Rahma",
+                    role: "Private Coaching Student",
+                    rating: 5.0,
+                    quote: "The private lessons are very effective. The coach is detailed yet relaxed. In just a few weeks, my technique has improved a lot.",
+                    image: "/images/testimonials/ayu-rahma.jpg",
+                },
+                {
+                    id: 8,
+                    name: "Daniel Surya",
+                    role: "Weekend Player",
+                    rating: 4.8,
+                    quote: "If you want exercise that's still fun, padel is the answer. At Padel, the atmosphere is friendly and professional — makes you want to come back.",
+                    image: "/images/testimonials/daniel-surya.jpg",
+                },
+            ],
         },
-        {
-            id: 3,
-            name: "Maya Rahman",
-            role: "Intermediate Player",
-            rating: 4.8,
-            quote: "Pelatih di sini benar-benar paham perkembangan pemain. Teknik saya dibenahi pelan-pelan, tapi hasilnya terasa signifikan.",
-            image: "/images/testimonials/maya-rahman.jpg",
-        },
-        {
-            id: 4,
-            name: "Rico Halim",
-            role: "Club Tournament Participant",
-            rating: 4.7,
-            quote: "Turnamen internalnya seru banget. Komunitasnya suportif, bukan yang bikin terintimidasi. Cocok untuk yang suka belajar sambil santai.",
-            image: "/images/testimonials/rico-halim.jpg",
-        },
-        {
-            id: 5,
-            name: "Laras Widodo",
-            role: "Parent of Junior Player",
-            rating: 4.9,
-            quote: "Anak saya ikut junior program di sini. Pelatih-pelatihnya ramah dan profesional. Dia jadi lebih percaya diri — bukan cuma di lapangan, tapi juga di sekolah.",
-            image: "/images/testimonials/laras-widodo.jpg",
-        },
-        {
-            id: 6,
-            name: "Kevin Wijaya",
-            role: "Active Member",
-            rating: 4.6,
-            quote: "Saya sudah pernah coba beberapa klub olahraga. Padel terasa beda: fasilitasnya rapi, jam latihan jelas, dan stafnya helpful.",
-            image: "/images/testimonials/kevin-wijaya.jpg",
-        },
-        {
-            id: 7,
-            name: "Ayu Rahma",
-            role: "Private Coaching Student",
-            rating: 5.0,
-            quote: "Private lesson-nya sangat efektif. Pelatihnya detail tapi tetap santai. Dalam beberapa minggu saja teknik saya banyak berkembang.",
-            image: "/images/testimonials/ayu-rahma.jpg",
-        },
-        {
-            id: 8,
-            name: "Daniel Surya",
-            role: "Weekend Player",
-            rating: 4.8,
-            quote: "Kalau mau olahraga tapi tetap fun, padel jawabannya. Di Padel, suasananya ramah dan profesional — bikin betah datang lagi.",
-            image: "/images/testimonials/daniel-surya.jpg",
-        },
-    ];
+    };
+
+    $: t = texts[$currentLanguage];
+    $: testimonials = t.testimonials;
 
     let currentIndex = 0;
 
@@ -104,7 +182,7 @@
                 <div
                     class="order-1 lg:order-none inline-block px-5 py-2 mb-0 lg:mb-8 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide justify-self-start"
                 >
-                    Cerita dari Member Kami
+                    {t.badge}
                 </div>
 
                 <!-- Quote (Dynamic) -->

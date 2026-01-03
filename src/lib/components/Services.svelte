@@ -1,5 +1,35 @@
 <script lang="ts">
-    // Placeholder for any interactive logic if needed later
+    import { currentLanguage } from "$lib/stores/language";
+
+    const texts = {
+        id: {
+            badge: "Layanan",
+            heading:
+                "Temukan berbagai program latihan dan coaching padel mulai dari dasar hingga persiapan turnamen. Kami siap mendukung pemain di setiap level.",
+            seeMore: "Lihat Lebih Banyak",
+            trainingProgram: "Program Pelatihan",
+            trainingDesc:
+                "Program dirancang untuk semua usia dan tingkat kemampuan.",
+            courtAccess: "Akses Lapangan",
+            courtRental: "Sewa Lapangan per Jam",
+            facilitiesDesc:
+                "Nikmati fasilitas yang dirancang untuk mendukung perkembangan, kompetisi, dan pengalaman bermain terbaik.",
+        },
+        en: {
+            badge: "Services",
+            heading:
+                "Discover various padel training and coaching programs from basics to tournament preparation. We're ready to support players at every level.",
+            seeMore: "See More",
+            trainingProgram: "Training Program",
+            trainingDesc: "Programs designed for all ages and skill levels.",
+            courtAccess: "Court Access",
+            courtRental: "Hourly Court Rental",
+            facilitiesDesc:
+                "Enjoy facilities designed to support your development, competition, and the best playing experience.",
+        },
+    };
+
+    $: t = texts[$currentLanguage];
 </script>
 
 <section
@@ -15,22 +45,20 @@
                 <div
                     class="inline-block px-5 py-2 mb-8 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide"
                 >
-                    Layanan
+                    {t.badge}
                 </div>
 
                 <h2
                     class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-12"
                 >
-                    Temukan berbagai program latihan dan coaching padel mulai
-                    dari dasar hingga persiapan turnamen. Kami siap mendukung
-                    pemain di setiap level.
+                    {t.heading}
                 </h2>
             </div>
 
             <button
                 class="bg-[#1A1A1A] text-white px-8 py-4 rounded-full font-medium text-base hover:bg-gray-900 transition-colors inline-flex items-center gap-2 group"
             >
-                Lihat Lebih Banyak
+                {t.seeMore}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -67,14 +95,13 @@
                     <span
                         class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium text-white"
                     >
-                        Program Pelatihan
+                        {t.trainingProgram}
                     </span>
                 </div>
 
                 <div class="flex items-end justify-between gap-4">
                     <p class="text-white text-base leading-relaxed max-w-[80%]">
-                        Program dirancang untuk semua usia dan tingkat
-                        kemampuan.
+                        {t.trainingDesc}
                     </p>
                     <div
                         class="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white flex-shrink-0 transition-transform duration-300"
@@ -110,8 +137,6 @@
                     alt="Court Access"
                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <!-- Overlay mainly for text readability if needed, but styling seems to be lighter based on description or standard card style -->
-                <!-- Assuming text is on top of image. Dark overlay usually needed. -->
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
                 ></div>
@@ -121,38 +146,21 @@
                         <span
                             class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium text-white"
                         >
-                            Akses Lapangan
+                            {t.courtAccess}
                         </span>
                     </div>
 
                     <div>
                         <h3 class="text-white text-base leading-relaxed">
-                            Sewa Lapangan per Jam
+                            {t.courtRental}
                         </h3>
                     </div>
                 </div>
             </div>
 
-            <!-- Description & Nav Buttons Section (Below the card image in the design provided by user description "Di bawah kanan teks kecil") 
-                 Wait, the user description: "Card 2... Di bawah kanan teks kecil: Nikmati fasilitas..." 
-                 "Tambahkan tombol navigasi slider dua lingkaran kecil di kanan bawah section."
-                 
-                 It seems the layout might be:
-                 Col 1: Text
-                 Col 2: Card 1 (Full height?)
-                 Col 3: Card 2 (Top) + Text/Nav (Bottom)? 
-                 
-                 Or maybe the text "Nikmati fasilitas..." is OUTSIDE the card?
-                 "Di bawah kanan teks kecil" - usually implies inside the card or below it.
-                 If I look at typical layouts like this (e.g. Bento grids), often the 3rd column is split.
-                 
-                 Let's assume "Nikmati fasilitas..." is BELOW the card in the 3rd column.
-            -->
-
             <div class="flex flex-col justify-between gap-6">
                 <p class="text-gray-600 leading-relaxed">
-                    Nikmati fasilitas yang dirancang untuk mendukung
-                    perkembangan, kompetisi, dan pengalaman bermain terbaik.
+                    {t.facilitiesDesc}
                 </p>
 
                 <div class="flex gap-4">

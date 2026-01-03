@@ -1,46 +1,109 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
+    import { currentLanguage } from "$lib/stores/language";
 
     let activePlan = "pro";
 
-    const plans = [
-        {
-            id: "pro",
-            name: "Pro Membership",
-            price: "120$",
-            features: [
-                "Unlimited group classes",
-                "Priority booking",
-                "4 private lessons",
-                "All tournament access",
+    const texts = {
+        id: {
+            badge: "Memberships",
+            heading:
+                "Tiga pilihan membership untuk meningkatkan kualitas permainanmu.",
+            subheading:
+                "Manfaat eksklusif. Pengalaman premium. Satu pilihan yang tepat.",
+            buyMembership: "Buy membership",
+            viewFeatures: "View Features",
+            mostPopular: "Most Popular Plan",
+            perMonth: "/month",
+            plans: [
+                {
+                    id: "pro",
+                    name: "Pro Membership",
+                    price: "120$",
+                    features: [
+                        "Unlimited group classes",
+                        "Priority booking",
+                        "4 private lessons",
+                        "All tournament access",
+                    ],
+                    isPopular: true,
+                },
+                {
+                    id: "elite",
+                    name: "Elite Plan",
+                    price: "200$",
+                    features: [
+                        "8 group classes",
+                        "4 court hours",
+                        "2 private lesson",
+                        "Club tournament access",
+                    ],
+                    isPopular: false,
+                },
+                {
+                    id: "basic",
+                    name: "Basic Plan",
+                    price: "80$",
+                    features: [
+                        "4 group classes",
+                        "2 court hours",
+                        "Equipment rental included",
+                    ],
+                    isPopular: false,
+                },
             ],
-            isPopular: true,
-            badge: "Most Popular Plan",
         },
-        {
-            id: "elite",
-            name: "Elite Plan",
-            price: "200$",
-            features: [
-                "8 group classes",
-                "4 court hours",
-                "2 private lesson",
-                "Club tournament access",
+        en: {
+            badge: "Memberships",
+            heading: "Three membership options to improve your game quality.",
+            subheading:
+                "Exclusive benefits. Premium experience. The right choice.",
+            buyMembership: "Buy membership",
+            viewFeatures: "View Features",
+            mostPopular: "Most Popular Plan",
+            perMonth: "/month",
+            plans: [
+                {
+                    id: "pro",
+                    name: "Pro Membership",
+                    price: "120$",
+                    features: [
+                        "Unlimited group classes",
+                        "Priority booking",
+                        "4 private lessons",
+                        "All tournament access",
+                    ],
+                    isPopular: true,
+                },
+                {
+                    id: "elite",
+                    name: "Elite Plan",
+                    price: "200$",
+                    features: [
+                        "8 group classes",
+                        "4 court hours",
+                        "2 private lessons",
+                        "Club tournament access",
+                    ],
+                    isPopular: false,
+                },
+                {
+                    id: "basic",
+                    name: "Basic Plan",
+                    price: "80$",
+                    features: [
+                        "4 group classes",
+                        "2 court hours",
+                        "Equipment rental included",
+                    ],
+                    isPopular: false,
+                },
             ],
-            isPopular: false,
         },
-        {
-            id: "basic",
-            name: "Basic Plan",
-            price: "80$",
-            features: [
-                "4 group classes",
-                "2 court hours",
-                "Equipment rental included",
-            ],
-            isPopular: false,
-        },
-    ];
+    };
+
+    $: t = texts[$currentLanguage];
+    $: plans = t.plans;
 </script>
 
 <section
@@ -56,7 +119,7 @@
             <div
                 class="order-1 lg:order-none lg:hidden inline-block px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide bg-white"
             >
-                Memberships
+                {t.badge}
             </div>
 
             <!-- Left Column: Membership Cards - Order 2 on mobile -->
@@ -88,7 +151,7 @@
                                         <div
                                             class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-xs font-medium text-white tracking-wide border border-white/20"
                                         >
-                                            {plan.badge}
+                                            {t.mostPopular}
                                         </div>
                                     {:else}
                                         <div></div>
@@ -100,7 +163,7 @@
                                         >
                                         <span
                                             class="text-white/80 text-sm font-light ml-1"
-                                            >/month</span
+                                            >{t.perMonth}</span
                                         >
                                     </div>
                                 </div>
@@ -129,7 +192,7 @@
                                     <button
                                         class="bg-[#1A1A1A] text-white px-8 py-4 rounded-full font-medium text-base hover:bg-gray-900 transition-all inline-flex items-center gap-2 group shadow-lg"
                                     >
-                                        Buy membership
+                                        {t.buyMembership}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -161,7 +224,7 @@
                                 <button
                                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-600/10 text-gray-700 text-sm font-medium hover:bg-gray-600/20 transition-all group-hover:text-black"
                                 >
-                                    View Features
+                                    {t.viewFeatures}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -210,12 +273,10 @@
                 <h2
                     class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-3"
                 >
-                    Tiga pilihan membership untuk meningkatkan kualitas
-                    permainanmu.
+                    {t.heading}
                 </h2>
                 <p class="text-gray-500 text-base font-light leading-relaxed">
-                    Manfaat eksklusif. Pengalaman premium. Satu pilihan yang
-                    tepat.
+                    {t.subheading}
                 </p>
             </div>
 
@@ -226,19 +287,17 @@
                 <div
                     class="inline-block px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide bg-white"
                 >
-                    Memberships
+                    {t.badge}
                 </div>
 
                 <div class="max-w-xl">
                     <h2
                         class="text-3xl md:text-4xl lg:text-[2.5rem] leading-snug font-normal text-black mb-6"
                     >
-                        Tiga pilihan membership untuk meningkatkan kualitas
-                        permainanmu.
+                        {t.heading}
                     </h2>
                     <p class="text-gray-500 text-xl font-light leading-relaxed">
-                        Manfaat eksklusif. Pengalaman premium. Satu pilihan yang
-                        tepat.
+                        {t.subheading}
                     </p>
                 </div>
 

@@ -1,4 +1,26 @@
 <script lang="ts">
+    import { currentLanguage } from "$lib/stores/language";
+
+    const texts = {
+        id: {
+            title: "Upgrade Skill Padelmu",
+            subtitle: "Satu Ayunan Lebih Dekat Menuju Kemenangan",
+            description:
+                "Rasakan serunya padel bersama pelatih berpengalaman, fasilitas nyaman, dan komunitas yang suportif.",
+            cta: "Mulai Perjalananmu",
+            trainerPromo: "Mulai latihan bersama pelatih professional",
+        },
+        en: {
+            title: "Upgrade Your Padel Skills",
+            subtitle: "One Swing Closer to Victory",
+            description:
+                "Experience the excitement of padel with experienced coaches, comfortable facilities, and a supportive community.",
+            cta: "Start Your Journey",
+            trainerPromo: "Start training with professional coaches",
+        },
+    };
+
+    $: t = texts[$currentLanguage];
 </script>
 
 <section id="hero" class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -26,25 +48,24 @@
                 <h1
                     class="text-white text-5xl md:text-6xl lg:text-[4rem] font-normal leading-[1.05] mb-4 md:mb-8 tracking-tight"
                 >
-                    Upgrade Skill Padelmu
+                    {t.title}
                     <span
                         class="block text-3xl md:text-4xl lg:text-[2rem] mt-2 font-light text-gray-200 tracking-normal"
                     >
-                        Satu Ayunan Lebih Dekat Menuju Kemenangan
+                        {t.subtitle}
                     </span>
                 </h1>
 
                 <p
                     class="text-base md:text-lg text-gray-200 mb-6 md:mb-12 leading-relaxed font-light max-w-lg mx-auto tracking-wide"
                 >
-                    Rasakan serunya padel bersama pelatih berpengalaman,
-                    fasilitas nyaman, dan komunitas yang suportif.
+                    {t.description}
                 </p>
 
                 <button
                     class="bg-black text-white px-10 py-4 rounded-full text-base font-normal hover:bg-gray-900 transition-all hover:-translate-y-1 cursor-pointer items-center inline-flex"
                 >
-                    Mulai Perjalananmu
+                    {t.cta}
                 </button>
             </div>
         </div>
@@ -61,11 +82,9 @@
                 <span
                     class="text-white text-sm font-light tracking-wide max-w-[200px] md:max-w-[150px] leading-tight opacity-90 text-center md:text-left"
                 >
-                    Mulai latihan bersama pelatih professional
+                    {t.trainerPromo}
                 </span>
 
-                <!-- Avatar Pill Card with Gradient from White (100%) to White (20%) -->
-                <!-- Since the background is white on the left, we need to ensure the card border is subtle or removed if not needed. -->
                 <!-- Avatar Pill Card with Gradient from White (40%) to White (5%) -->
                 <div
                     class="bg-gradient-to-r from-white/40 to-white/5 backdrop-blur-md rounded-full p-1.5 flex items-center justify-center transition-colors cursor-default"

@@ -17,3 +17,32 @@ body {
 section[id] {
 	scroll-margin-top: 100px;
 }
+
+/* Language transition effects */
+.lang-transition {
+	transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.lang-transition.fade-out {
+	opacity: 0;
+	transform: translateY(-4px);
+}
+
+.lang-transition.fade-in {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Smooth text transitions for dynamic content */
+h1, h2, h3, h4, h5, h6, p, span, a, button, blockquote, label {
+	transition: opacity 0.2s ease-out;
+}
+
+/* View transitions API for modern browsers */
+@supports (view-transition-name: language) {
+	::view-transition-old(language),
+	::view-transition-new(language) {
+		animation-duration: 0.3s;
+	}
+}
+
