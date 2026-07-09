@@ -252,7 +252,7 @@
                 onclick={() => mobileMenuOpen = false}
                 class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all"
             >
-                <i class="ph-duotone ph-sparkles text-base shrink-0"></i>
+                <i class="ph-duotone ph-sparkle text-base shrink-0"></i>
                 <span>{languageState.current === 'ID' ? 'Program & Layanan' : 'Programs & Services'}</span>
             </a>
             <a
