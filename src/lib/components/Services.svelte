@@ -1,196 +1,175 @@
 <script lang="ts">
-    // Placeholder for any interactive logic if needed later
+    import { languageState } from "$lib/state.svelte";
+    import { fade } from "svelte/transition";
+    
+    // Carousel state
+    let startIndex = $state(0);
+
+    const services = $derived([
+        {
+            id: 1,
+            tag: languageState.current === "ID" ? "Program Pelatihan" : "Training Program",
+            title: languageState.current === "ID" ? "Program Kelas Pelatihan" : "Class Training Program",
+            desc: languageState.current === "ID" ? "Program dirancang untuk semua usia dan tingkat kemampuan." : "Programs designed for all ages and skill levels.",
+            img: "/images/images/practice-card.webp",
+            link: "/booking?coach=true"
+        },
+        {
+            id: 2,
+            tag: languageState.current === "ID" ? "Akses Lapangan" : "Court Access",
+            title: languageState.current === "ID" ? "Sewa Lapangan per Jam" : "Hourly Court Rental",
+            desc: languageState.current === "ID" ? "Nikmati fasilitas lapangan indoor & outdoor yang dirancang untuk mendukung permainan terbaik." : "Enjoy indoor & outdoor court facilities designed to support the best play.",
+            img: "/images/images/lesson-card.webp",
+            link: "/booking"
+        },
+        {
+            id: 3,
+            tag: languageState.current === "ID" ? "Komunitas & Event" : "Community & Events",
+            title: languageState.current === "ID" ? "Turnamen & Matchplay" : "Tournaments & Matchplay",
+            desc: languageState.current === "ID" ? "Ikuti liga internal reguler, temukan lawan seimbang, dan bergabunglah bersama komunitas Padel." : "Join regular internal leagues, find balanced opponents, and join the Padel community.",
+            img: "/images/images/hero-image.webp",
+            link: "/#membership"
+        }
+    ]);
+
+    // Active cards to display in slot 1 (Column 2) and slot 2 (Column 3)
+    const card1 = $derived(services[startIndex]);
+    const card2 = $derived(services[(startIndex + 1) % services.length]);
+
+    function handleNext() {
+        startIndex = (startIndex + 1) % services.length;
+    }
+
+    function handlePrev() {
+        startIndex = (startIndex - 1 + services.length) % services.length;
+    }
 </script>
 
 <section
     id="services"
     class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pt-12 md:pb-20"
 >
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 h-full">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <!-- Column 1: Text Content -->
         <div
-            class="flex flex-col justify-between items-start lg:pr-8 h-full min-h-[200px] md:min-h-[250px]"
+            class="flex flex-col justify-between items-start lg:pr-8 min-h-[180px] md:min-h-[220px]"
         >
             <div>
-                <div
-                    class="inline-block px-5 py-2 mb-8 rounded-full border border-gray-200 text-sm font-medium text-gray-600 tracking-wide"
-                >
-                    Layanan
+                <div class="inline-block px-5 py-2 mb-4 sm:mb-6 rounded-full border border-slate-200 text-xs sm:text-sm font-semibold text-slate-500 tracking-wider">
+                    {languageState.current === "ID" ? "Program & Layanan" : "Programs & Services"}
                 </div>
-
-                <h2 class="text-3xl leading-snug font-normal text-black mb-12">
-                    Temukan berbagai program latihan dan coaching padel mulai
-                    dari dasar hingga persiapan turnamen. Kami siap mendukung
-                    pemain di setiap level.
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.1] font-normal text-slate-900 tracking-tight">
+                    {languageState.current === "ID" ? "Program Kelas & Sewa Lapangan" : "Class Programs & Court Rentals"}
                 </h2>
             </div>
-
-            <button
-                class="bg-[#1A1A1A] text-white px-8 py-4 rounded-full font-medium text-base hover:bg-gray-900 transition-colors inline-flex items-center gap-2 group"
+            
+            <a 
+                href="/booking"
+                class="self-start bg-slate-900 text-white hover:bg-black transition-all font-semibold px-8 py-3.5 rounded-full text-sm cursor-pointer flex items-center gap-2 mt-4 sm:mt-6"
             >
-                Lihat Lebih Banyak
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                    />
-                </svg>
-            </button>
+                <span>{languageState.current === "ID" ? "Mulai Sewa Lapangan" : "Start Court Booking"}</span>
+                <i class="ph-duotone ph-calendar text-base text-[#2B95FF]"></i>
+            </a>
         </div>
 
-        <!-- Column 2: Card 1 (Training Program) -->
-        <div
-            class="relative rounded-2xl md:rounded-[2.5rem] overflow-hidden group min-h-[350px] md:min-h-[500px]"
-        >
-            <!-- Dummy Image -->
-            <img
-                src="/images/images/practice-card.png"
-                alt="Training Program"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
-            ></div>
-
-            <div class="absolute inset-0 p-6 flex flex-col justify-between">
-                <div class="self-start">
-                    <span
-                        class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium text-white"
-                    >
-                        Program Pelatihan
-                    </span>
-                </div>
-
-                <div class="flex items-end justify-between gap-4">
-                    <p class="text-white text-base leading-relaxed max-w-[80%]">
-                        Program dirancang untuk semua usia dan tingkat
-                        kemampuan.
-                    </p>
-                    <div
-                        class="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white flex-shrink-0 transition-transform duration-300"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="2"
-                            stroke="currentColor"
-                            class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                            />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Column 3: Card 2 (Court Access) & Navigation -->
-        <div class="flex flex-col h-full gap-6 md:gap-8">
-            <!-- Card 2 -->
-            <div
-                class="relative rounded-2xl md:rounded-[2.5rem] overflow-hidden group flex-grow min-h-[180px]"
+        <!-- Column 2: Card 1 (Dynamic from Carousel) -->
+        {#key card1.id}
+            <a
+                href={card1.link}
+                class="relative rounded-[2rem] overflow-hidden group min-h-[320px] sm:min-h-[420px] flex flex-col justify-between block cursor-pointer transition-all hover:ring-2 hover:ring-[#2B95FF]/20"
+                in:fade={{ duration: 300 }}
             >
-                <!-- Dummy Image -->
                 <img
-                    src="/images/icons/tennis-ball.jpg"
-                    alt="Court Access"
-                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={card1.img}
+                    alt={card1.title}
+                    class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                 />
-                <!-- Overlay mainly for text readability if needed, but styling seems to be lighter based on description or standard card style -->
-                <!-- Assuming text is on top of image. Dark overlay usually needed. -->
                 <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
                 ></div>
 
-                <div class="absolute inset-0 p-6 flex flex-col justify-between">
+                <div class="relative z-10 p-6 sm:p-8 flex flex-col justify-between h-full w-full">
                     <div class="self-start">
                         <span
-                            class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-sm font-medium text-white"
+                            class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold text-white"
                         >
-                            Akses Lapangan
+                            {card1.tag}
                         </span>
                     </div>
 
-                    <div>
-                        <h3 class="text-white text-base leading-relaxed">
-                            Sewa Lapangan per Jam
-                        </h3>
+                    <div class="flex items-end justify-between gap-4 mt-auto">
+                        <div class="flex flex-col gap-1.5 max-w-[75%]">
+                            <h3 class="text-white text-lg sm:text-xl font-bold tracking-tight">{card1.title}</h3>
+                            <p class="text-white/80 text-xs sm:text-sm leading-relaxed font-light">
+                                {card1.desc}
+                            </p>
+                        </div>
+                        <div
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900 flex items-center justify-center text-white flex-shrink-0 transition-transform duration-300 group-hover:bg-[#2B95FF]"
+                        >
+                            <i class="ph-duotone ph-arrow-up-right text-base sm:text-lg transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
+        {/key}
 
-            <!-- Description & Nav Buttons Section (Below the card image in the design provided by user description "Di bawah kanan teks kecil") 
-                 Wait, the user description: "Card 2... Di bawah kanan teks kecil: Nikmati fasilitas..." 
-                 "Tambahkan tombol navigasi slider dua lingkaran kecil di kanan bawah section."
-                 
-                 It seems the layout might be:
-                 Col 1: Text
-                 Col 2: Card 1 (Full height?)
-                 Col 3: Card 2 (Top) + Text/Nav (Bottom)? 
-                 
-                 Or maybe the text "Nikmati fasilitas..." is OUTSIDE the card?
-                 "Di bawah kanan teks kecil" - usually implies inside the card or below it.
-                 If I look at typical layouts like this (e.g. Bento grids), often the 3rd column is split.
-                 
-                 Let's assume "Nikmati fasilitas..." is BELOW the card in the 3rd column.
-            -->
+        <!-- Column 3: Card 2 & Info & Navigation -->
+        <div class="flex flex-col gap-6 sm:gap-8 justify-between">
+            <!-- Card 2 (Dynamic from Carousel) -->
+            {#key card2.id}
+                <a
+                    href={card2.link}
+                    class="relative rounded-[2rem] overflow-hidden group min-h-[180px] sm:min-h-[200px] flex flex-col justify-between block cursor-pointer transition-all hover:ring-2 hover:ring-[#2B95FF]/20 animate-fade"
+                    in:fade={{ duration: 300 }}
+                >
+                    <img
+                        src={card2.img}
+                        alt={card2.title}
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"
+                    ></div>
 
-            <div class="flex flex-col justify-between gap-6">
-                <p class="text-gray-600 leading-relaxed">
-                    Nikmati fasilitas yang dirancang untuk mendukung
-                    perkembangan, kompetisi, dan pengalaman bermain terbaik.
+                    <div class="relative z-10 p-6 sm:p-8 flex flex-col justify-between h-full w-full">
+                        <div class="self-start">
+                            <span
+                                class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold text-white"
+                            >
+                                {card2.tag}
+                            </span>
+                        </div>
+
+                        <div class="mt-auto">
+                            <h3 class="text-white text-base sm:text-lg font-bold tracking-tight">
+                                {card2.title}
+                            </h3>
+                        </div>
+                    </div>
+                </a>
+            {/key}
+
+            <!-- Description and Navigation Controls -->
+            <div class="flex flex-col justify-between gap-4">
+                <p class="text-slate-500 leading-relaxed text-sm sm:text-base font-light min-h-[50px]">
+                    {card2.desc}
                 </p>
 
-                <div class="flex gap-4">
+                <div class="flex gap-3 mt-2">
                     <button
-                        class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all group"
+                        onclick={handlePrev}
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-300 flex items-center justify-center hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all group cursor-pointer"
                         aria-label="Previous slide"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                            />
-                        </svg>
+                        <i class="ph-duotone ph-arrow-left text-base sm:text-lg"></i>
                     </button>
                     <button
-                        class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all group"
+                        onclick={handleNext}
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-300 flex items-center justify-center hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all group cursor-pointer"
                         aria-label="Next slide"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-5 h-5"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                            />
-                        </svg>
+                        <i class="ph-duotone ph-arrow-right text-base sm:text-lg"></i>
                     </button>
                 </div>
             </div>
