@@ -231,10 +231,10 @@
 
 <Navbar />
 
-<div class="relative min-h-[calc(100vh-100px)] w-full py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-600">
+<div class="relative min-h-[calc(100vh-100px)] w-full py-16 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-600 overflow-x-hidden">
     <!-- Visual background gradient highlights (subtle & soft) -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2B95FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FFA800]/3 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-[#2B95FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-[#FFA800]/3 rounded-full blur-[100px] pointer-events-none"></div>
 
     <div class="max-w-4xl mx-auto z-10 relative">
         <!-- Progress Steps Header -->
