@@ -1,5 +1,6 @@
 <script lang="ts">
     import { languageState } from "$lib/state.svelte";
+    import { siteConfig } from "$lib/config/site";
     let loaded = $state(false);
 </script>
 
@@ -107,8 +108,9 @@
 
             <!-- Bottom Right: Socials (Text Only) -->
             <div class="flex items-center gap-4 sm:gap-6">
+                {#if siteConfig.social.instagram}
                 <a
-                    href="https://instagram.com"
+                    href={siteConfig.social.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="group flex items-center gap-1.5 text-white text-xs sm:text-sm font-semibold hover:text-gray-300 transition-colors duration-300 cursor-pointer"
@@ -116,8 +118,10 @@
                     <span>Instagram</span>
                     <i class="ph-duotone ph-arrow-up-right text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
                 </a>
+                {/if}
+                {#if siteConfig.social.facebook}
                 <a
-                    href="https://facebook.com"
+                    href={siteConfig.social.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="group flex items-center gap-1.5 text-white text-xs sm:text-sm font-semibold hover:text-gray-300 transition-colors duration-300 cursor-pointer"
@@ -125,8 +129,10 @@
                     <span>Facebook</span>
                     <i class="ph-duotone ph-arrow-up-right text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
                 </a>
+                {/if}
+                {#if siteConfig.social.tiktok}
                 <a
-                    href="https://tiktok.com"
+                    href={siteConfig.social.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="group flex items-center gap-1.5 text-white text-xs sm:text-sm font-semibold hover:text-gray-300 transition-colors duration-300 cursor-pointer"
@@ -134,6 +140,7 @@
                     <span>TikTok</span>
                     <i class="ph-duotone ph-arrow-up-right text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
                 </a>
+                {/if}
             </div>
         </div>
     </div>

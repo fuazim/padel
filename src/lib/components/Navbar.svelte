@@ -4,6 +4,7 @@
     import { fade, fly } from "svelte/transition";
     import { languageState, authState } from "$lib/state.svelte";
     import { auth } from "$lib/auth";
+    import { siteConfig } from "$lib/config/site";
 
     async function handleLogout() {
         try {
@@ -82,7 +83,7 @@
                     <img
                         class="h-7 sm:h-8 w-auto"
                         src="/images/logos/padel-light.svg"
-                        alt="Padel Logo"
+                        alt="{siteConfig.name} Logo"
                     />
                 </a>
             </div>

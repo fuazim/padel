@@ -1,5 +1,6 @@
 <script lang="ts">
     import { languageState } from "$lib/state.svelte";
+    import { siteConfig } from "$lib/config/site";
 </script>
 
 <footer class="w-full bg-[#090D1A] text-slate-400 pt-16 pb-8 border-t border-white/5">
@@ -11,21 +12,22 @@
                 <a href="/" class="inline-block">
                     <img
                         src="/images/logos/padel-dark.svg"
-                        alt="Padel Logo"
+                        alt="{siteConfig.name} Logo"
                         class="h-8 w-auto"
                     />
                 </a>
                 <p class="text-sm font-light leading-relaxed text-slate-400">
                     {#if languageState.current === "ID"}
-                        Bergabunglah dengan komunitas padel yang dinamis di mana minat Anda berpadu dengan performa terbaik. Cari rekan bermain, pesan lapangan dengan mudah, dan tingkatkan permainan Anda bersama kami.
+                        {siteConfig.description.id}
                     {:else}
-                        Join a vibrant padel community where your passion meets performance. Find partners, book courts with ease, and level up your game with us.
+                        {siteConfig.description.en}
                     {/if}
                 </p>
                 <!-- Social Media Links (Phosphor Duotone) -->
                 <div class="flex items-center gap-3">
+                    {#if siteConfig.social.instagram}
                     <a
-                        href="https://instagram.com"
+                        href={siteConfig.social.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"
@@ -33,8 +35,10 @@
                     >
                         <i class="ph-duotone ph-instagram-logo text-xl text-slate-400 group-hover:text-white transition-colors"></i>
                     </a>
+                    {/if}
+                    {#if siteConfig.social.facebook}
                     <a
-                        href="https://facebook.com"
+                        href={siteConfig.social.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Facebook"
@@ -42,8 +46,10 @@
                     >
                         <i class="ph-duotone ph-facebook-logo text-xl text-slate-400 group-hover:text-white transition-colors"></i>
                     </a>
+                    {/if}
+                    {#if siteConfig.social.tiktok}
                     <a
-                        href="https://tiktok.com"
+                        href={siteConfig.social.tiktok}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="TikTok"
@@ -51,6 +57,7 @@
                     >
                         <i class="ph-duotone ph-tiktok-logo text-xl text-slate-400 group-hover:text-white transition-colors"></i>
                     </a>
+                    {/if}
                 </div>
             </div>
 
@@ -89,15 +96,15 @@
                 <ul class="flex flex-col gap-4 text-sm font-light">
                     <li class="flex items-start gap-3">
                         <i class="ph-duotone ph-phone text-lg text-[#2B95FF] shrink-0 mt-0.5"></i>
-                        <a href="tel:+6281234567890" class="hover:text-[#2B95FF] transition-colors">+62 812-3456-7890</a>
+                        <a href="tel:{siteConfig.contact.phone.replace(/[^0-9+]/g, '')}" class="hover:text-[#2B95FF] transition-colors">{siteConfig.contact.phone}</a>
                     </li>
                     <li class="flex items-start gap-3">
                         <i class="ph-duotone ph-envelope text-lg text-[#2B95FF] shrink-0 mt-0.5"></i>
-                        <a href="mailto:info@padelclub.com" class="hover:text-[#2B95FF] transition-colors">info@padelclub.com</a>
+                        <a href="mailto:{siteConfig.contact.email}" class="hover:text-[#2B95FF] transition-colors">{siteConfig.contact.email}</a>
                     </li>
                     <li class="flex items-start gap-3">
                         <i class="ph-duotone ph-map-pin text-lg text-[#2B95FF] shrink-0 mt-0.5"></i>
-                        <span>Jl. Padel Utama No. 45, Jakarta Selatan, Indonesia</span>
+                        <span>{siteConfig.contact.address}</span>
                     </li>
                 </ul>
             </div>
@@ -110,11 +117,11 @@
                 <div class="flex flex-col gap-3 text-sm font-light">
                     <div class="flex justify-between border-b border-white/5 pb-2">
                         <span>{languageState.current === "ID" ? "Senin - Jumat:" : "Mon - Fri:"}</span>
-                        <span class="text-white font-medium">06:00 - 22:00</span>
+                        <span class="text-white font-medium">{siteConfig.hours.weekday}</span>
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2">
                         <span>{languageState.current === "ID" ? "Sabtu - Minggu:" : "Sat - Sun:"}</span>
-                        <span class="text-white font-medium">06:00 - 23:00</span>
+                        <span class="text-white font-medium">{siteConfig.hours.weekend}</span>
                     </div>
                     <p class="text-xs text-slate-500 italic mt-2">
                         {#if languageState.current === "ID"}
@@ -130,7 +137,7 @@
 
         <!-- Divider Line -->
         <div class="border-t border-white/5 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
-            <p>&copy; {new Date().getFullYear()} Padel Club. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
             <div class="flex gap-6">
                 <a href="/privacy" class="hover:text-white transition-colors">
                     {languageState.current === "ID" ? "Kebijakan Privasi" : "Privacy Policy"}

@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import { auth } from "$lib/auth";
     import { authState } from "$lib/state.svelte";
+    import { siteConfig } from "$lib/config/site";
 
     let { children } = $props();
 
@@ -38,6 +39,10 @@
 </script>
 
 <svelte:head>
+    <title>{siteConfig.name} - {siteConfig.tagline.en}</title>
+    <meta name="description" content="{siteConfig.description.en}" />
+    <meta property="og:title" content="{siteConfig.name} - {siteConfig.tagline.en}" />
+    <meta property="og:description" content="{siteConfig.description.en}" />
     <link rel="icon" href={favicon} />
 </svelte:head>
 
