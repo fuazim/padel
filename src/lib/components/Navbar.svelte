@@ -12,6 +12,9 @@
         } catch (err) {
             console.error("SignOut failed:", err);
         }
+        try {
+            localStorage.removeItem("padel_demo_user");
+        } catch (_) {}
         authState.user = null;
         window.location.href = "/login";
     }

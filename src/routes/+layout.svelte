@@ -27,11 +27,29 @@
                     window.location.href = "/profile";
                 }
             } else {
-                authState.user = null;
+                try {
+                    const localDemo = localStorage.getItem("padel_demo_user");
+                    if (localDemo) {
+                        authState.user = JSON.parse(localDemo);
+                    } else {
+                        authState.user = null;
+                    }
+                } catch (_) {
+                    authState.user = null;
+                }
             }
         } catch (err) {
             console.error("Auth session retrieval failed:", err);
-            authState.user = null;
+            try {
+                const localDemo = localStorage.getItem("padel_demo_user");
+                if (localDemo) {
+                    authState.user = JSON.parse(localDemo);
+                } else {
+                    authState.user = null;
+                }
+            } catch (_) {
+                authState.user = null;
+            }
         } finally {
             authState.checked = true;
         }

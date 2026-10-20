@@ -2,6 +2,18 @@
     import { page } from "$app/stores";
     import { fade, slide } from "svelte/transition";
     import { languageState, authState } from "$lib/state.svelte";
+    import { auth } from "$lib/auth";
+
+    async function handleAdminLogout() {
+        try {
+            await auth.signOut();
+        } catch (_) {}
+        try {
+            localStorage.removeItem("padel_demo_user");
+        } catch (_) {}
+        authState.user = null;
+        window.location.href = "/login";
+    }
 
     let { children } = $props();
 
@@ -144,14 +156,15 @@
                 </span>
             </button>
             <!-- Logout Button -->
-            <a
-                href="/login"
-                class="flex items-center gap-3 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50/50 transition-all {isCollapsed ? 'w-12 h-12 p-0 justify-center' : 'w-full px-4 py-3'}"
+            <button
+                type="button"
+                onclick={handleAdminLogout}
+                class="flex items-center gap-3 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50/50 transition-all cursor-pointer {isCollapsed ? 'w-12 h-12 p-0 justify-center' : 'w-full px-4 py-3'}"
                 title={isCollapsed ? (languageState.current === "ID" ? "Keluar" : "Log out") : ""}
             >
                 <i class="ph-duotone ph-sign-out text-lg shrink-0"></i>
                 <span class={isCollapsed ? 'hidden' : 'block'}>{languageState.current === "ID" ? "Keluar" : "Log out"}</span>
-            </a>
+            </button>
         </div>
     </aside>
 
@@ -214,13 +227,14 @@
                         >EN</button>
                     </div>
                 </div>
-                <a
-                    href="/login"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50/50 transition-all"
+                <button
+                    type="button"
+                    onclick={handleAdminLogout}
+                    class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50/50 transition-all cursor-pointer"
                 >
                     <i class="ph-duotone ph-sign-out text-lg shrink-0"></i>
                     <span>{languageState.current === "ID" ? "Keluar" : "Log out"}</span>
-                </a>
+                </button>
             </div>
         </aside>
     {/if}
