@@ -184,7 +184,7 @@
                                 <!-- CTA Button -->
                                 <div class="mt-2">
                                     <a
-                                        href="/register"
+                                        href="/booking"
                                         class="bg-slate-900 text-white px-8 py-3.5 rounded-full font-semibold text-xs sm:text-sm hover:bg-black transition-all inline-flex items-center gap-1.5 group cursor-pointer"
                                     >
                                         <span>{languageState.current === "ID" ? "Pilih Plan" : "Choose Plan"}</span>

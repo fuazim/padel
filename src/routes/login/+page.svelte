@@ -224,14 +224,6 @@
                 </div>
             </div>
 
-            <!-- Footer links -->
-            <div class="text-center text-sm font-light text-slate-500">
-                {languageState.current === "ID" ? "Belum punya akun?" : "Don't have an account?"}
-                <a href="/register" class="text-[#2B95FF] font-semibold hover:underline ml-1">
-                    {languageState.current === "ID" ? "Daftar Sekarang" : "Register Now"}
-                </a>
-            </div>
-
         </div>
     </div>
 </div>
